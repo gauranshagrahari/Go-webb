@@ -1,4 +1,24 @@
-// Language translations
+// ========== GLOBAL VISITOR COUNTER using CountAPI ==========
+async function updateVisitorCounter() {
+  const counterElement = document.getElementById('counterValue');
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    const response = await fetch('https://api.countapi.xyz/hit/gowebb/visitors', {
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) throw new Error('Network response was not ok');
+    const data = await response.json();
+    counterElement.innerText = data.value;
+    console.log('Visitor count updated:', data.value);
+  } catch (error) {
+    console.error('Counter error:', error);
+    counterElement.innerText = '—';
+  }
+}// ========== LANGUAGE TRANSLATIONS ==========
 const translations = {
   en: {
     motto: "बढ़ाओ धंधा ऑनलाइन",
@@ -7,7 +27,7 @@ const translations = {
     navServices: "Services",
     navProjects: "Projects",
     navContact: "Contact Us",
-    langBtn: "हिंदी में देखें",
+    langToggleText: "हिंदी में देखें",
     heroTitle: "Digital Solutions for <span>Indian Businesses</span>",
     heroSubhead: "Premium web & app development services tailored for the Indian market. Trusted by 100+ businesses across India, proudly based in Gorakhpur.",
     heroBtn: "Start Your Project <i class='fas fa-arrow-right' style='margin-left: 10px;'></i>",
@@ -29,7 +49,8 @@ const translations = {
     adv6Title: "Mobile-First Reach",
     adv6Desc: "With 700+ million Indian mobile users, a mobile-friendly website ensures you're accessible to customers wherever they are.",
     servicesTitle: "Our Expertise",
-    servicesSubhead: "Comprehensive digital solutions for Indian businesses of all sizes",
+    servicesSubhead: "Swipe or scroll to explore our services →",
+    scrollHintText: "Scroll horizontally",
     service1Title: "Website Development",
     service1Desc: "Custom, responsive websites with Hindi/English support, UPI integration, and local payment gateways.",
     service2Title: "App Development",
@@ -43,7 +64,8 @@ const translations = {
     service6Title: "Local Business Solutions",
     service6Desc: "Specialized solutions for Indian local businesses, kirana stores, and regional enterprises.",
     projectsTitle: "Our Project Previews",
-    projectsSubhead: "Live websites we've built – hover to see names, click to explore",
+    projectsSubhead: "Swipe or scroll to see our work →",
+    projectsScrollHint: "Scroll horizontally",
     project1Name: "Restaurant Website",
     project2Name: "Library Website",
     project3Name: "Girls Hostel Website",
@@ -124,7 +146,7 @@ const translations = {
     navServices: "सेवाएं",
     navProjects: "प्रोजेक्ट्स",
     navContact: "संपर्क करें",
-    langBtn: "View in English",
+    langToggleText: "View in English",
     heroTitle: "<span>भारतीय व्यवसायों</span> के लिए डिजिटल समाधान",
     heroSubhead: "भारतीय बाजार के अनुरूप प्रीमियम वेब और ऐप विकास सेवाएं। गोरखपुर में स्थित, पूरे भारत में 100+ व्यवसायों द्वारा विश्वसनीय।",
     heroBtn: "अपना प्रोजेक्ट शुरू करें <i class='fas fa-arrow-right' style='margin-left: 10px;'></i>",
@@ -146,7 +168,8 @@ const translations = {
     adv6Title: "मोबाइल-प्रथम पहुंच",
     adv6Desc: "700+ मिलियन भारतीय मोबाइल उपयोगकर्ताओं के साथ, एक मोबाइल-अनुकूल वेबसाइट सुनिश्चित करती है कि आप ग्राहकों के लिए सुलभ हैं चाहे वे कहीं भी हों।",
     servicesTitle: "हमारी विशेषज्ञता",
-    servicesSubhead: "सभी आकारों के भारतीय व्यवसायों के लिए व्यापक डिजिटल समाधान",
+    servicesSubhead: "हमारी सेवाओं को देखने के लिए स्वाइप या स्क्रॉल करें →",
+    scrollHintText: "क्षैतिज स्क्रॉल करें",
     service1Title: "वेबसाइट विकास",
     service1Desc: "हिंदी/अंग्रेजी समर्थन, UPI एकीकरण और स्थानीय भुगतान गेटवे के साथ कस्टम, उत्तरदायी वेबसाइटें।",
     service2Title: "ऐप विकास",
@@ -160,7 +183,8 @@ const translations = {
     service6Title: "स्थानीय व्यवसाय समाधान",
     service6Desc: "भारतीय स्थानीय व्यवसायों, किराना स्टोर और क्षेत्रीय उद्यमों के लिए विशेष समाधान।",
     projectsTitle: "हमारे प्रोजेक्ट पूर्वावलोकन",
-    projectsSubhead: "हमारे द्वारा बनाई गई लाइव वेबसाइटें – नाम देखने के लिए होवर करें, देखने के लिए क्लिक करें",
+    projectsSubhead: "हमारा काम देखने के लिए स्वाइप या स्क्रॉल करें →",
+    projectsScrollHint: "क्षैतिज स्क्रॉल करें",
     project1Name: "रेस्टोरेंट वेबसाइट",
     project2Name: "लाइब्रेरी वेबसाइट",
     project3Name: "गर्ल्स हॉस्टल वेबसाइट",
@@ -237,46 +261,155 @@ const translations = {
   }
 };
 
-let currentLang = 'en';
-
-function toggleLanguage() {
+let currentLang = 'en';function toggleLanguage() {
   currentLang = currentLang === 'en' ? 'hi' : 'en';
   updateContent(currentLang);
+  
+  // Add animation feedback
+  const btn = document.getElementById('langToggle');
+  btn.style.transform = 'scale(0.95)';
+  setTimeout(() => {
+    btn.style.transform = 'scale(1)';
+  }, 200);
 }
 
 function updateContent(lang) {
   const t = translations[lang];
   
-  // Update all translatable elements
-  for (const [key, value] of Object.entries(t)) {
-    const element = document.getElementById(key);
-    if (element) {
-      if (key.includes('Title') || key.includes('Btn') || key.includes('Preview') || key.includes('Story') || key.includes('Desc') || key.includes('Address') || key.includes('Hours')) {
-        if (key === 'heroTitle' || key === 'aboutTitle' || key === 'mapDetailAddress' || key === 'mapHours') {
-          element.innerHTML = value;
-        } else {
-          element.innerHTML = value;
-        }
-      } else {
-        element.innerText = value;
-      }
-    }
-  }
+  // Update all elements with IDs
+  document.getElementById('mottoHeader').innerText = t.motto;
+  document.getElementById('navHome').innerText = t.navHome;
+  document.getElementById('navAbout').innerText = t.navAbout;
+  document.getElementById('navServices').innerText = t.navServices;
+  document.getElementById('navProjects').innerText = t.navProjects;
+  document.getElementById('navContact').innerText = t.navContact;
+  document.getElementById('langToggleText').innerText = t.langToggleText;
+  document.getElementById('heroTitle').innerHTML = t.heroTitle;
+  document.getElementById('heroSubhead').innerText = t.heroSubhead;
+  document.getElementById('heroBtn').innerHTML = t.heroBtn;
+  document.getElementById('aboutTitle').innerHTML = t.aboutTitle;
+  document.getElementById('aboutDesc').innerText = t.aboutDesc;
+  document.getElementById('aboutStory').innerHTML = t.aboutStory;
+  document.getElementById('advantagesTitle').innerText = t.advantagesTitle;
+  document.getElementById('advantagesSubhead').innerText = t.advantagesSubhead;
+  document.getElementById('adv1Title').innerText = t.adv1Title;
+  document.getElementById('adv1Desc').innerText = t.adv1Desc;
+  document.getElementById('adv2Title').innerText = t.adv2Title;
+  document.getElementById('adv2Desc').innerText = t.adv2Desc;
+  document.getElementById('adv3Title').innerText = t.adv3Title;
+  document.getElementById('adv3Desc').innerText = t.adv3Desc;
+  document.getElementById('adv4Title').innerText = t.adv4Title;
+  document.getElementById('adv4Desc').innerText = t.adv4Desc;
+  document.getElementById('adv5Title').innerText = t.adv5Title;
+  document.getElementById('adv5Desc').innerText = t.adv5Desc;
+  document.getElementById('adv6Title').innerText = t.adv6Title;
+  document.getElementById('adv6Desc').innerText = t.adv6Desc;
+  document.getElementById('servicesTitle').innerText = t.servicesTitle;
+  document.getElementById('servicesSubhead').innerText = t.servicesSubhead;
+  document.getElementById('scrollHintText').innerText = t.scrollHintText;
+  document.getElementById('service1Title').innerText = t.service1Title;
+  document.getElementById('service1Desc').innerText = t.service1Desc;
+  document.getElementById('service2Title').innerText = t.service2Title;
+  document.getElementById('service2Desc').innerText = t.service2Desc;
+  document.getElementById('service3Title').innerText = t.service3Title;
+  document.getElementById('service3Desc').innerText = t.service3Desc;
+  document.getElementById('service4Title').innerText = t.service4Title;
+  document.getElementById('service4Desc').innerText = t.service4Desc;
+  document.getElementById('service5Title').innerText = t.service5Title;
+  document.getElementById('service5Desc').innerText = t.service5Desc;
+  document.getElementById('service6Title').innerText = t.service6Title;
+  document.getElementById('service6Desc').innerText = t.service6Desc;
+  document.getElementById('projectsTitle').innerText = t.projectsTitle;
+  document.getElementById('projectsSubhead').innerText = t.projectsSubhead;
+  document.getElementById('projectsScrollHint').innerText = t.projectsScrollHint;
+  document.getElementById('project1Name').innerText = t.project1Name;
+  document.getElementById('project2Name').innerText = t.project2Name;
+  document.getElementById('project3Name').innerText = t.project3Name;
+  document.getElementById('project4Name').innerText = t.project4Name;
+  document.getElementById('livePreview').innerText = t.livePreview;
+  document.getElementById('livePreview2').innerText = t.livePreview;
+  document.getElementById('livePreview3').innerText = t.livePreview;
+  document.getElementById('livePreview4').innerText = t.livePreview;
+  document.getElementById('testimonialsTitle').innerText = t.testimonialsTitle;
+  document.getElementById('testimonialsSubhead').innerText = t.testimonialsSubhead;
+  document.getElementById('testimonial1').innerText = t.testimonial1;
+  document.getElementById('testimonial2').innerText = t.testimonial2;
+  document.getElementById('testimonial3').innerText = t.testimonial3;
+  document.getElementById('testimonial4').innerText = t.testimonial4;
+  document.getElementById('client1').innerText = t.client1;
+  document.getElementById('client2').innerText = t.client2;
+  document.getElementById('client3').innerText = t.client3;
+  document.getElementById('client4').innerText = t.client4;
+  document.getElementById('paymentTitle').innerText = t.paymentTitle;
+  document.getElementById('paymentDesc').innerText = t.paymentDesc;
+  document.getElementById('paymentBtn').innerHTML = t.paymentBtn;
+  document.getElementById('pricingTitle').innerText = t.pricingTitle;
+  document.getElementById('pricingSubhead').innerText = t.pricingSubhead;
+  document.getElementById('staticPlanTitle').innerText = t.staticPlanTitle;
+  document.getElementById('staticPlanDesc').innerText = t.staticPlanDesc;
+  document.getElementById('staticFeature1').innerText = t.staticFeature1;
+  document.getElementById('staticFeature2').innerText = t.staticFeature2;
+  document.getElementById('staticFeature3').innerText = t.staticFeature3;
+  document.getElementById('staticFeature4').innerText = t.staticFeature4;
+  document.getElementById('staticKnowMore').innerHTML = t.staticKnowMore;
+  document.getElementById('dynamicPlanTitle').innerText = t.dynamicPlanTitle;
+  document.getElementById('dynamicPlanDesc').innerText = t.dynamicPlanDesc;
+  document.getElementById('dynamicFeature1').innerText = t.dynamicFeature1;
+  document.getElementById('dynamicFeature2').innerText = t.dynamicFeature2;
+  document.getElementById('dynamicFeature3').innerText = t.dynamicFeature3;
+  document.getElementById('dynamicFeature4').innerText = t.dynamicFeature4;
+  document.getElementById('dynamicFeature5').innerText = t.dynamicFeature5;
+  document.getElementById('dynamicKnowMore').innerHTML = t.dynamicKnowMore;
+  document.getElementById('faqTitle').innerText = t.faqTitle;
+  document.getElementById('faqSubhead').innerText = t.faqSubhead;
+  document.getElementById('faq1Q').innerText = t.faq1Q;
+  document.getElementById('faq1A').innerText = t.faq1A;
+  document.getElementById('faq2Q').innerText = t.faq2Q;
+  document.getElementById('faq2A').innerText = t.faq2A;
+  document.getElementById('faq3Q').innerText = t.faq3Q;
+  document.getElementById('faq3A').innerText = t.faq3A;
+  document.getElementById('faq4Q').innerText = t.faq4Q;
+  document.getElementById('faq4A').innerText = t.faq4A;
+  document.getElementById('faq5Q').innerText = t.faq5Q;
+  document.getElementById('faq5A').innerText = t.faq5A;
+  document.getElementById('contactTitle').innerText = t.contactTitle;
+  document.getElementById('contactSubhead').innerText = t.contactSubhead;
+  document.getElementById('sendEmailBtn').innerHTML = t.sendEmailBtn;
+  document.getElementById('mapTitle').innerText = t.mapTitle;
+  document.getElementById('mapAddress').innerText = t.mapAddress;
+  document.getElementById('mapDetailTitle').innerText = t.mapDetailTitle;
+  document.getElementById('mapDetailAddress').innerHTML = t.mapDetailAddress;
+  document.getElementById('mapHoursTitle').innerText = t.mapHoursTitle;
+  document.getElementById('mapHours').innerHTML = t.mapHours;
+  document.getElementById('mapFooter').innerHTML = t.mapFooter;
+  document.getElementById('footerDesc').innerText = t.footerDesc;
+  document.getElementById('quickLinksTitle').innerText = t.quickLinksTitle;
+  document.getElementById('footerHome').innerText = t.footerHome;
+  document.getElementById('footerAbout').innerText = t.footerAbout;
+  document.getElementById('footerServices').innerText = t.footerServices;
+  document.getElementById('footerProjects').innerText = t.footerProjects;
+  document.getElementById('footerContact').innerText = t.footerContact;
+  document.getElementById('servicesTitleFooter').innerText = t.servicesTitleFooter;
+  document.getElementById('footerService1').innerText = t.footerService1;
+  document.getElementById('footerService2').innerText = t.footerService2;
+  document.getElementById('footerService3').innerText = t.footerService3;
+  document.getElementById('footerService4').innerText = t.footerService4;
+  document.getElementById('footerService5').innerText = t.footerService5;
+  document.getElementById('officeTitle').innerText = t.officeTitle;
+  document.getElementById('officeAddress').innerText = t.officeAddress;
+  document.getElementById('copyright').innerHTML = t.copyright;
   
-  // Special case for the lang toggle button
-  document.getElementById('langToggle').innerText = t.langBtn;
-  
-  // Special case for the WhatsApp button (has no ID for text, but we set its HTML)
+  // Update WhatsApp button text
   const whatsappBtn = document.getElementById('whatsappBtn');
   if (whatsappBtn) {
     whatsappBtn.innerHTML = lang === 'en' ? 
       'WhatsApp <i class="fab fa-whatsapp" style="margin-left: 10px;"></i>' : 
       'व्हाट्सएप <i class="fab fa-whatsapp" style="margin-left: 10px;"></i>';
   }
-}// Event listener for language toggle
-document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+}
 
-// Scroll reveal and other functionality
+// Event listener for language toggle
+document.getElementById('langToggle').addEventListener('click', toggleLanguage);// Scroll reveal and other functionality
 document.addEventListener('DOMContentLoaded', function() {
   function reveal() {
     var reveals = document.querySelectorAll('.reveal');
@@ -361,6 +494,9 @@ document.addEventListener('DOMContentLoaded', function() {
       window.open(`https://wa.me/919369344744?text=${whatsappMessage}`, '_blank');
     });
   }
+
+  // Initialize global visitor counter
+  updateVisitorCounter();
 });// ========== ENHANCED KNOW MORE PAGES ==========
 function showPlanDetails(planType) {
   let planDetails = '';
@@ -782,4 +918,4 @@ function showPlanDetails(planType) {
   }
   const newWindow = window.open('', '_blank', 'width=900,height=700');
   newWindow.document.write(planDetails);
-}
+    }
