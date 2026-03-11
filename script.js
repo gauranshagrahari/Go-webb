@@ -1,23 +1,4 @@
-// ========== GLOBAL VISITOR COUNTER using CountAPI ==========
-async function updateVisitorCounter() {
-  const counterElement = document.getElementById('counterValue');
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-    const response = await fetch('https://api.countapi.xyz/hit/gowebb/visitors', {
-      signal: controller.signal
-    });
-    clearTimeout(timeoutId);
-
-    if (!response.ok) throw new Error('Network response was not ok');
-    const data = await response.json();
-    counterElement.innerText = data.value;
-    console.log('Visitor count updated:', data.value);
-  } catch (error) {
-    console.error('Counter error:', error);
-    counterElement.innerText = '—';
-  }
 }// ========== LANGUAGE TRANSLATIONS ==========
 const translations = {
   en: {
