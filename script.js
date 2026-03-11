@@ -1,5 +1,4 @@
-
-}// ========== LANGUAGE TRANSLATIONS ==========
+// ========== LANGUAGE TRANSLATIONS ==========
 const translations = {
   en: {
     motto: "बढ़ाओ धंधा ऑनलाइन",
