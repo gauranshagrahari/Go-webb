@@ -33,9 +33,12 @@
   </div>
 </header>
 
-<!-- Language Toggle Button (above About section) -->
+<!-- Language Toggle Button -->
 <div class="lang-toggle-container">
-  <button class="lang-toggle-btn" id="langToggle">हिंदी में देखें</button>
+  <button class="lang-toggle-btn" id="langToggle">
+    <i class="fas fa-language"></i>
+    <span id="langToggleText">हिंदी में देखें</span>
+  </button>
 </div>
 
 <!-- Indian Pattern Background -->
@@ -52,7 +55,7 @@
     <div class="hero-text reveal">
       <h1 id="heroTitle">Digital Solutions for <span>Indian Businesses</span></h1>
       <p class="section-subhead" style="margin-left: 0; text-align: left;" id="heroSubhead">Premium web & app development services tailored for the Indian market. Trusted by 100+ businesses across India, proudly based in Gorakhpur.</p>
-      <a href="https://rzp.io/rzp/lOfS2eI" class="btn btn-primary" style="margin-top: 30px;" target="_blank" id="heroBtn">Start Your Project <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
+      <a href="#contact" class="btn btn-primary" style="margin-top: 30px;" id="heroBtn">Start Your Project <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
     </div>
     <div class="hero-mockup reveal">
       <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Website Development Dashboard" class="mockup-image float-animation">
@@ -82,7 +85,7 @@
       </div>
     </div>
   </div>
-</section><!-- 3. ADVANTAGES OF HAVING A WEBSITE -->
+  </section><!-- 3. ADVANTAGES OF HAVING A WEBSITE -->
 <section style="background: var(--light);">
   <div class="container">
     <div style="text-align: center;" class="reveal">
@@ -124,14 +127,17 @@
   </div>
 </section>
 
-<!-- 4. SERVICES SECTION -->
+<!-- 4. SERVICES SECTION (Horizontal Scroll) -->
 <section id="services">
   <div class="container">
     <div style="text-align: center;" class="reveal">
       <h2 id="servicesTitle">Our Expertise</h2>
-      <p class="section-subhead" id="servicesSubhead">Comprehensive digital solutions for Indian businesses of all sizes</p>
+      <p class="section-subhead" id="servicesSubhead">Swipe or scroll to explore our services →</p>
     </div>
-    <div class="services-grid">
+    <div class="scroll-hint">
+      <i class="fas fa-chevron-left"></i> <span id="scrollHintText">Scroll horizontally</span> <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="horizontal-scroll">
       <div class="service-card reveal">
         <i class="fas fa-laptop-code service-icon"></i>
         <h3 id="service1Title">Website Development</h3>
@@ -164,42 +170,45 @@
       </div>
     </div>
   </div>
-</section><!-- 5. PROJECT PREVIEWS -->
+</section><!-- 5. PROJECT PREVIEWS (Horizontal Scroll) -->
 <section id="portfolio" style="background: var(--light);">
   <div class="container">
     <div style="text-align: center;" class="reveal">
       <h2 id="projectsTitle">Our Project Previews</h2>
-      <p class="section-subhead" id="projectsSubhead">Live websites we've built – hover to see names, click to explore</p>
+      <p class="section-subhead" id="projectsSubhead">Swipe or scroll to see our work →</p>
     </div>
-    <div class="portfolio-grid" style="margin-top: 50px;">
+    <div class="scroll-hint">
+      <i class="fas fa-chevron-left"></i> <span id="projectsScrollHint">Scroll horizontally</span> <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="horizontal-scroll">
       <!-- Restaurant -->
-      <a href="https://restaurants-website-one.vercel.app/" target="_blank" class="portfolio-item reveal">
-        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Restaurant Website" class="portfolio-img">
-        <div class="portfolio-overlay">
+      <a href="https://restaurants-website-one.vercel.app/" target="_blank" class="project-card reveal">
+        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Restaurant Website" class="project-img">
+        <div class="project-overlay">
           <h3 id="project1Name">Restaurant Website</h3>
           <p id="livePreview">Live preview →</p>
         </div>
       </a>
       <!-- Library -->
-      <a href="https://new-library-two.vercel.app/" target="_blank" class="portfolio-item reveal" data-delay="100">
-        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Library Website" class="portfolio-img">
-        <div class="portfolio-overlay">
+      <a href="https://new-library-two.vercel.app/" target="_blank" class="project-card reveal" data-delay="100">
+        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Library Website" class="project-img">
+        <div class="project-overlay">
           <h3 id="project2Name">Library Website</h3>
           <p id="livePreview2">Live preview →</p>
         </div>
       </a>
       <!-- Girls Hostel -->
-      <a href="https://girls-hostel.vercel.app/" target="_blank" class="portfolio-item reveal" data-delay="200">
-        <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Girls Hostel Website" class="portfolio-img">
-        <div class="portfolio-overlay">
+      <a href="https://girls-hostel.vercel.app/" target="_blank" class="project-card reveal" data-delay="200">
+        <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Girls Hostel Website" class="project-img">
+        <div class="project-overlay">
           <h3 id="project3Name">Girls Hostel Website</h3>
           <p id="livePreview3">Live preview →</p>
         </div>
       </a>
       <!-- Gym -->
-      <a href="https://iron-valley-gym-website.vercel.app/" target="_blank" class="portfolio-item reveal" data-delay="300">
-        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gym Website" class="portfolio-img">
-        <div class="portfolio-overlay">
+      <a href="https://iron-valley-gym-website.vercel.app/" target="_blank" class="project-card reveal" data-delay="300">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gym Website" class="project-img">
+        <div class="project-overlay">
           <h3 id="project4Name">Iron Valley Gym</h3>
           <p id="livePreview4">Live preview →</p>
         </div>
@@ -208,32 +217,32 @@
   </div>
 </section>
 
-<!-- 6. TESTIMONIALS -->
+<!-- 6. TESTIMONIALS (Horizontal Scroll) -->
 <section>
   <div class="container">
     <div style="text-align: center;" class="reveal">
       <h2 id="testimonialsTitle">What Our Indian Clients Say</h2>
       <p class="section-subhead" id="testimonialsSubhead">Trusted by businesses across India, especially from Gorakhpur</p>
     </div>
-    <div class="testimonials-slider">
+    <div class="horizontal-scroll">
       <div class="testimonial-card reveal">
         <div class="avatar"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Priya"></div>
-        <p style="font-size: 1.2rem; font-style: italic; margin: 20px 0;" id="testimonial1">"GoWebb transformed our restaurant's online presence. Online orders increased by 60% in just 2 months!"</p>
+        <p style="font-size: 1rem; font-style: italic; margin-bottom: 15px;" id="testimonial1">"GoWebb transformed our restaurant's online presence. Online orders increased by 60% in just 2 months!"</p>
         <p><strong id="client1">Priya Sharma</strong>, Gorakhpur Darbar, GKP</p>
       </div>
       <div class="testimonial-card reveal" data-delay="100">
         <div class="avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Rajesh"></div>
-        <p style="font-size: 1.2rem; font-style: italic; margin: 20px 0;" id="testimonial2">"The school portal they built for us is fantastic. Parents love the real-time updates and attendance tracking."</p>
+        <p style="font-size: 1rem; font-style: italic; margin-bottom: 15px;" id="testimonial2">"The school portal they built for us is fantastic. Parents love the real-time updates and attendance tracking."</p>
         <p><strong id="client2">Rajesh Kumar</strong>, GPS Gorakhpur</p>
       </div>
       <div class="testimonial-card reveal" data-delay="200">
         <div class="avatar"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Anita"></div>
-        <p style="font-size: 1.2rem; font-style: italic; margin: 20px 0;" id="testimonial3">"Finally a tech partner who understands the Indian market. UPI integration was seamless!"</p>
+        <p style="font-size: 1rem; font-style: italic; margin-bottom: 15px;" id="testimonial3">"Finally a tech partner who understands the Indian market. UPI integration was seamless!"</p>
         <p><strong id="client3">Anita Singh</strong>, Purvanchal Mart, GKP</p>
       </div>
       <div class="testimonial-card reveal" data-delay="300">
         <div class="avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Vikram"></div>
-        <p style="font-size: 1.2rem; font-style: italic; margin: 20px 0;" id="testimonial4">"The real estate portal handles thousands of listings daily. Support team is always available."</p>
+        <p style="font-size: 1rem; font-style: italic; margin-bottom: 15px;" id="testimonial4">"The real estate portal handles thousands of listings daily. Support team is always available."</p>
         <p><strong id="client4">Vikram Singh</strong>, Gorakhpur Properties</p>
       </div>
     </div>
@@ -249,7 +258,7 @@
       <a href="https://rzp.io/rzp/lOfS2eI" class="payment-button" target="_blank" id="paymentBtn">Pay Now <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
-</section><!-- 8. PRICING -->
+             </section><!-- 8. PRICING -->
 <section style="background: linear-gradient(135deg, var(--primary) 0%, #1a1b4e 100%); color: white;">
   <div class="container">
     <div style="text-align: center;" class="reveal">
@@ -316,7 +325,7 @@
       </div>
     </div>
   </div>
-</section><!-- 10. CONTACT SECTION -->
+      </section><!-- 10. CONTACT SECTION -->
 <section id="contact">
   <div class="container">
     <div style="text-align: center;" class="reveal">
@@ -371,9 +380,7 @@
       </div>
     </div>
   </div>
-</section>
-
-<!-- 11. FOOTER with Social Media Links -->
+</section><!-- 11. FOOTER with Social Media Links and Global Visitor Counter -->
 <footer>
   <div class="container">
     <div class="footer-grid">
@@ -412,6 +419,12 @@
       </div>
     </div>
     <div class="footer-bottom">
+      <!-- Global Visitor Counter -->
+      <div class="visitor-counter" id="visitorCounter">
+        <i class="fas fa-eye"></i>
+        <span>Global Visitors:</span>
+        <span class="counter-number" id="counterValue">⟳</span>
+      </div>
       <p id="copyright">© 2025 GoWebb. All rights reserved. Made with ❤️ in Gorakhpur, India</p>
     </div>
   </div>
@@ -420,4 +433,4 @@
 <!-- External JavaScript -->
 <script src="script.js"></script>
 </body>
-</html>
+  </html>
