@@ -1138,11 +1138,30 @@ aspect-ratio: 1 / 1;
       <p class="section-subhead" style="margin-left: 0; text-align: left;" id="heroSubhead">Premium web & app development services tailored for the Indian market. Trusted by 100+ businesses across India, proudly based in Gorakhpur.</p>
       <a href="#contact" class="btn btn-primary" style="margin-top: 30px;" id="heroBtn">Start Your Project <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
     </div>
-    <div class="hero-mockup reveal">
-      <video autoplay muted loop playsinline style="width:100%; height:auto;">
-  <source src="https://raw.githubusercontent.com/gauranshagrahari/Go-webb/main/Yellow%2C%20Black%20and%20White%20Minimalist%20Animated%20Business%20Advertising%20Mobile%20Vid_20260315_052251_00001.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-        </video>
+    <div class="floating-video">
+  <video autoplay muted loop playsinline>
+    <source src="https://raw.githubusercontent.com/gauranshagrahari/Go-webb/main/Yellow%2C%20Black%20and%20White%20Minimalist%20Animated%20Business%20Advertising%20Mobile%20Vid_20260315_052251_00001.mp4" type="video/mp4">
+  </video>
+</div>
+
+<style>
+.floating-video{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 260px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  z-index: 999;
+}
+
+.floating-video video{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+</style>
     </div>
   </div>
 </section>
