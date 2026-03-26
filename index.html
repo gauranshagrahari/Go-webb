@@ -127,10 +127,43 @@
 
     /* Language Toggle Button */
     .lang-toggle-container {
-      text-align: center;
-      margin: 20px 0 0;
-      padding-top: 80px;
-    }
+  text-align: center;
+  margin: 20px 0 0;
+  padding-top: 80px;
+  position: relative;
+  transition: all 0.35s ease;
+}
+    /* Floating state */
+.lang-toggle-floating {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  /* prevent layout jump */
+  margin: 0;
+  padding: 0;
+
+  animation: slideUp 0.3s ease;
+}
+
+/* animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* shadow when floating */
+.lang-toggle-floating .lang-toggle-btn {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
 
     .lang-toggle-btn {
       background: var(--primary);
@@ -2509,6 +2542,18 @@
       const newWindow = window.open('', '_blank', 'width=900,height=700');
       newWindow.document.write(planDetails);
     }
+    const langToggle = document.querySelector('.lang-toggle-container');
+
+// store original position
+const triggerPoint = langToggle.offsetTop;
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > triggerPoint) {
+    langToggle.classList.add('lang-toggle-floating');
+  } else {
+    langToggle.classList.remove('lang-toggle-floating');
+  }
+});
   </script>
 </body>
 </html>
