@@ -1231,6 +1231,269 @@
     </div>
   </section>
 
+  <!----see how your website will look button---->
+  <!-- ========== BUTTON + HIDDEN DEMO MODAL ========== -->
+<!-- Paste this code after your hero section (where you want the button to appear) -->
+
+<style>
+  /* Demo Button Styling */
+  .demo-trigger {
+    text-align: center;
+    margin: 30px 0 10px;
+  }
+  .btn-demo {
+    background: linear-gradient(135deg, #2D2F7E, #1a1b4e);
+    color: white;
+    border: 2px solid #FF9933;
+    padding: 14px 32px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  .btn-demo i {
+    color: #FF9933;
+  }
+  .btn-demo:hover {
+    background: #FF9933;
+    color: #2D2F7E;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 35px rgba(255,153,51,0.3);
+    border-color: white;
+  }
+  .btn-demo:hover i {
+    color: #2D2F7E;
+  }
+
+  /* Modal Overlay */
+  .demo-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInModal 0.3s ease;
+  }
+  @keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Modal Content */
+  .demo-modal-content {
+    width: 90%;
+    max-width: 1300px;
+    height: 90vh;
+    background: transparent;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    border: 2px solid #FF9933;
+  }
+
+  /* Close Button */
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    z-index: 10001;
+    transition: 0.2s;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .modal-close:hover {
+    background: #FF9933;
+    color: #2D2F7E;
+    transform: scale(1.1);
+  }
+
+  /* Iframe */
+  .demo-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .demo-modal-content {
+      width: 95%;
+      height: 85vh;
+    }
+    .btn-demo {
+      padding: 12px 24px;
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<!-- Button -->
+<div class="demo-trigger">
+  <button class="btn-demo" id="openDemoModalBtn">
+    <i class="fas fa-eye"></i> See how your website will look instantly
+  </button>
+</div>
+
+<!-- Hidden Modal with Demo Page -->
+<div id="demoModal" class="demo-modal">
+  <div class="demo-modal-content">
+    <div class="modal-close" id="closeDemoModalBtn">&times;</div>
+    <iframe id="demoIframe" class="demo-iframe" srcdoc="
+      <!DOCTYPE html>
+      <html lang='en'>
+      <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>GoWebb.in | Live Business Website Demos</title>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'>
+        <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap' rel='stylesheet'>
+        <style>
+          *{margin:0;padding:0;box-sizing:border-box;}
+          body{font-family:'Inter',sans-serif;background:#fff;overflow-x:hidden;}
+          :root{--primary:#2D2F7E;--accent:#FF9933;--secondary:#138808;--dark:#1e1e2f;}
+          .selector{min-height:100vh;background:linear-gradient(135deg,#2D2F7E 0%,#1a1b4e 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden;}
+          .selector::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(255,153,51,0.15) 0%,transparent 70%);top:-100px;right:-100px;border-radius:50%;}
+          .selector::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(19,136,8,0.1) 0%,transparent 70%);bottom:-50px;left:-50px;border-radius:50%;}
+          .logo-area{text-align:center;margin-bottom:10px;animation:fadeDown 0.6s ease;}
+          .logo-area .brand{font-family:'Poppins',sans-serif;font-size:3rem;font-weight:800;color:white;}
+          .logo-area .brand span{color:var(--accent);}
+          .logo-area .tagline{color:rgba(255,255,255,0.6);font-size:0.95rem;letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+          .selector-headline{text-align:center;margin-bottom:30px;animation:fadeDown 0.7s ease;}
+          .selector-headline h1{font-family:'Poppins',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;color:white;line-height:1.2;}
+          .selector-headline h1 span{color:var(--accent);}
+          .selector-headline p{color:rgba(255,255,255,0.65);font-size:1.1rem;margin-top:12px;}
+          .search-container{width:100%;max-width:700px;margin:0 auto 40px auto;position:relative;z-index:2;animation:fadeUp 0.6s ease;}
+          .search-wrapper{background:rgba(255,255,255,0.95);backdrop-filter:blur(4px);border-radius:60px;padding:6px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 28px rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.3);}
+          .search-wrapper:focus-within{box-shadow:0 0 0 3px rgba(255,153,51,0.5);background:white;}
+          .search-icon{font-size:1.2rem;color:var(--primary);}
+          .search-wrapper input{flex:1;background:transparent;border:none;padding:14px 0;font-size:1rem;font-family:'Inter',sans-serif;font-weight:500;outline:none;color:#1e1e2f;}
+          .search-wrapper input::placeholder{color:#8a8aa5;font-weight:400;}
+          .clear-search{font-size:1.2rem;color:#999;cursor:pointer;transition:0.2s;padding:6px;border-radius:50%;}
+          .clear-search:hover{color:var(--accent);background:rgba(0,0,0,0.05);}
+          .business-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;width:100%;position:relative;z-index:1;}
+          .biz-card{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.12);border-radius:24px;padding:30px 20px;text-align:center;transition:all 0.3s ease;backdrop-filter:blur(10px);text-decoration:none;display:block;}
+          .biz-card:hover{background:rgba(255,153,51,0.15);border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 40px rgba(255,153,51,0.2);}
+          .biz-card .icon{font-size:2.8rem;margin-bottom:14px;display:block;}
+          .biz-card h3{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:700;color:white;margin-bottom:6px;}
+          .biz-card p{font-size:0.82rem;color:rgba(255,255,255,0.5);}
+          .no-results-msg{grid-column:1/-1;text-align:center;background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);padding:40px 20px;border-radius:40px;margin:20px 0;color:white;font-size:1.1rem;font-weight:500;border:1px dashed rgba(255,153,51,0.6);}
+          .no-results-msg i{font-size:2.2rem;color:var(--accent);margin-bottom:12px;display:block;}
+          .no-results-msg span{color:var(--accent);font-weight:800;}
+          .bottom-note{margin-top:40px;text-align:center;color:rgba(255,255,255,0.4);font-size:0.85rem;animation:fadeUp 1s ease;}
+          .bottom-note span{color:var(--accent);font-weight:600;}
+          @keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+          @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+          @media (max-width:768px){.business-grid{grid-template-columns:repeat(2,1fr);}.logo-area .brand{font-size:2.2rem;}}
+          @media (max-width:480px){.business-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.biz-card{padding:20px 12px;}.biz-card .icon{font-size:2.2rem;}}
+        </style>
+      </head>
+      <body>
+        <div class='selector'>
+          <div class='logo-area'><div class='brand'>Go<span>Webb</span>.in</div><div class='tagline'>India ka Digital Partner</div></div>
+          <div class='selector-headline'><h1>Apne business ka website<br><span>live dekho — abhi, free mein</span></h1><p>Apna business type choose karo aur dekho aapki website kaisi dikhegi 👇</p></div>
+          <div class='search-container'><div class='search-wrapper'><i class='fas fa-search search-icon'></i><input type='text' id='searchInput' placeholder='Search business... coaching, clinic, salon, restaurant, gym, etc.' autocomplete='off'><i class='fas fa-times-circle clear-search' id='clearSearchBtn' style='display: none;'></i></div></div>
+          <div class='business-grid' id='businessGrid'>
+            <a href='https://coaching-classes-demo.vercel.app/' class='biz-card' target='_blank' data-search='coaching tutor classes academy tuition'><span class='icon'>🎓</span><h3>Coaching / Tutor</h3><p>Classes, Academy, Tuition</p></a>
+            <a href='https://beauty-salon-demo-ashen.vercel.app/' class='biz-card' target='_blank' data-search='beauty salon parlour spa'><span class='icon'>💄</span><h3>Beauty Salon</h3><p>Hair, Makeup, Spa</p></a>
+            <a href='https://restaurants-demo-website.vercel.app/' class='biz-card' target='_blank' data-search='restaurant cafe dining'><span class='icon'>🍽️</span><h3>Restaurant / Cafe</h3><p>Fine Dining, Cafe, Dhaba</p></a>
+            <a href='https://karate-academy-demo.vercel.app/' class='biz-card' target='_blank' data-search='karate academy martial arts'><span class='icon'>🥋</span><h3>Karate Academy</h3><p>Martial Arts, Self Defense</p></a>
+            <a href='https://bridal-makeup-demo.vercel.app/' class='biz-card' target='_blank' data-search='bridal makeup artist wedding'><span class='icon'>👰</span><h3>Bridal Makeup Artist</h3><p>Wedding Specialist</p></a>
+            <a href='https://bridal-makeup-demo-f57a.vercel.app/' class='biz-card' target='_blank' data-search='bridal makeup luxury wedding'><span class='icon'>💍</span><h3>Luxury Bridal Studio</h3><p>Premium Wedding Makeup</p></a>
+            <a href='https://hair-transplant-clinic-demo.vercel.app/' class='biz-card' target='_blank' data-search='hair transplant clinic fue'><span class='icon'>💇‍♂️</span><h3>Hair Transplant Clinic</h3><p>FUE, DHI, Restoration</p></a>
+            <a href='https://gym-demo-website-rho.vercel.app/' class='biz-card' target='_blank' data-search='gym fitness workout'><span class='icon'>💪</span><h3>Gym / Fitness</h3><p>Workout, CrossFit, Strength</p></a>
+            <a href='https://interior-designer-demo.vercel.app/' class='biz-card' target='_blank' data-search='interior designer decor'><span class='icon'>🏠</span><h3>Interior Designer</h3><p>Home, Office, Luxury Decor</p></a>
+            <a href='https://cafe-demo-website-nine.vercel.app/' class='biz-card' target='_blank' data-search='cafe coffee shop bakery'><span class='icon'>☕</span><h3>Cafe / Coffee Shop</h3><p>Beverages, Snacks, Ambience</p></a>
+            <a href='https://ayurvedic-clinic-demo-website.vercel.app/' class='biz-card' target='_blank' data-search='ayurvedic clinic ayurveda'><span class='icon'>🌿</span><h3>Ayurvedic Clinic</h3><p>Panchakarma, Herbal, Wellness</p></a>
+            <a href='https://hotel-demo-website-sand.vercel.app/' class='biz-card' target='_blank' data-search='hotel lodge accommodation'><span class='icon'>🏨</span><h3>Hotel / Lodge</h3><p>Accommodation, Stay, Hospitality</p></a>
+            <a href='https://property-dealer-iota.vercel.app/' class='biz-card' target='_blank' data-search='property dealer real estate broker'><span class='icon'>🏘️</span><h3>Property Dealer</h3><p>Real Estate, Broker, Builder</p></a>
+            <a href='https://nail-makeup-artist-demo.vercel.app/' class='biz-card' target='_blank' data-search='nail artist makeup beauty'><span class='icon'>💅</span><h3>Nail & Makeup Artist</h3><p>Nail Art, Makeup, Manicure</p></a>
+            <a href='https://ivf-centre-demo.vercel.app/' class='biz-card' target='_blank' data-search='ivf centre fertility'><span class='icon'>🤰</span><h3>IVF Centre</h3><p>Fertility, Test Tube Baby</p></a>
+            <a href='https://dental-clinic-demo-alpha.vercel.app/' class='biz-card' target='_blank' data-search='dental clinic dentist teeth'><span class='icon'>🦷</span><h3>Dental Clinic</h3><p>Dentist, Implants, Whitening</p></a>
+            <a href='https://skin-clinic-demo-two.vercel.app/' class='biz-card' target='_blank' data-search='skin clinic dermatologist'><span class='icon'>✨</span><h3>Skin Clinic</h3><p>Dermatologist, Skin Care</p></a>
+            <a href='https://vercel.com/gauranshagraharis-projects/orthopedic-clinic-demo' class='biz-card' target='_blank' data-search='orthopedic clinic bone joint'><span class='icon'>🦴</span><h3>Orthopedic Clinic</h3><p>Bone & Joint Specialist</p></a>
+            <a href='https://cloud-kitchen-demo.vercel.app/' class='biz-card' target='_blank' data-search='cloud kitchen delivery'><span class='icon'>🍔</span><h3>Cloud Kitchen</h3><p>Food Delivery Only</p></a>
+            <a href='https://yoga-classes-demo.vercel.app/' class='biz-card' target='_blank' data-search='yoga classes meditation'><span class='icon'>🧘</span><h3>Yoga Classes</h3><p>Meditation, Wellness, Pranayama</p></a>
+            <a href='https://kitchen-designer-demo.vercel.app/' class='biz-card' target='_blank' data-search='kitchen designer modular'><span class='icon'>🍳</span><h3>Kitchen Designer</h3><p>Modular Kitchen, Cabinets</p></a>
+            <a href='https://travel-agency-demo-six.vercel.app/' class='biz-card' target='_blank' data-search='travel agency tour package'><span class='icon'>✈️</span><h3>Travel Agency</h3><p>Holidays, Tours, Cab, Flights</p></a>
+            <a href='https://homeopathic-clinic-demo.vercel.app/' class='biz-card' target='_blank' data-search='homeopathic clinic homeopathy'><span class='icon'>🌱</span><h3>Homeopathic Clinic</h3><p>Natural Healing, Homeopathy</p></a>
+          </div>
+          <div id='noResultMessage' class='no-results-msg' style='display: none;'><i class='fas fa-store-slash'></i> 🤔 Koi business match nahi mila? <span>Try different keyword</span><br><small>Aapka business category list mein nahi? Phir bhi hum banayenge! 🚀</small></div>
+          <div class='bottom-note'>Sirf <span>₹9/day</span> mein — chai se bhi sasta 🍵</div>
+        </div>
+        <script>
+          const searchInput=document.getElementById('searchInput');
+          const clearBtn=document.getElementById('clearSearchBtn');
+          const cards=document.querySelectorAll('.biz-card');
+          const noResultDiv=document.getElementById('noResultMessage');
+          function filterCards(){const term=searchInput.value.trim().toLowerCase();let anyVisible=false;cards.forEach(card=>{const title=card.querySelector('h3')?.innerText.toLowerCase()||'';const desc=card.querySelector('p')?.innerText.toLowerCase()||'';const searchData=card.getAttribute('data-search')?.toLowerCase()||'';const match=term===''||title.includes(term)||desc.includes(term)||searchData.includes(term);card.style.display=match?'':'none';if(match)anyVisible=true;});noResultDiv.style.display=(term!==''&&!anyVisible)?'flex':'none';clearBtn.style.display=term.length>0?'flex':'none';}
+          function clearSearch(){searchInput.value='';filterCards();searchInput.focus();}
+          searchInput.addEventListener('input',filterCards);
+          clearBtn.addEventListener('click',clearSearch);
+          filterCards();
+        </script>
+      </body>
+      </html>
+    "></iframe>
+  </div>
+</div>
+
+<script>
+  // Modal open/close functionality
+  (function() {
+    const modal = document.getElementById('demoModal');
+    const openBtn = document.getElementById('openDemoModalBtn');
+    const closeBtn = document.getElementById('closeDemoModalBtn');
+
+    if (openBtn && modal) {
+      openBtn.addEventListener('click', function() {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    if (closeBtn && modal) {
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Close when clicking outside the modal content
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  })();
+</script>
+
   <!-- 2. ABOUT / WHO WE ARE -->
   <section id="about">
     <div class="container">
